@@ -1,28 +1,39 @@
+var timer = function(){
+	$('#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right').prepend('<label id="minutes">00</label>:<label id="seconds">00</label >&nbsp;&nbsp;&nbsp;');
+ 	minutesLabel = document.getElementById("minutes");
+ 	secondsLabel = document.getElementById("seconds");
+	totalSeconds = 0;
+	setInterval(setTime, 1000);
+
+	 function setTime() {
+	  ++totalSeconds;
+	  secondsLabel.innerHTML = pad(totalSeconds % 60);
+	  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+	}
+
+	function pad(val) {
+	  var valString = val + "";
+	  if (valString.length < 2) {
+	    return "0" + valString;
+	  } else {
+	    return valString;
+	  }
+	}
+}
+
+var createCounter = function(){
+	currentNum = localStorage.getItem('NEU Task');
+	$("<span id='current' contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid light gray; margin: 0px 10px;'></span").insertBefore("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right")
+$('#current').text(currentNum);
+}
+if ( $( "#current" ).length == 0 ) {
+    createCounter();
+}
+
 $( document ).ready(function() {
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
-setInterval(setTime, 1000);
-
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-}
-
-function pad(val) {
-  var valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
-}
-
 if (counter) throw counter.init(), "resetting";
-
 var counter = {
-        docObj: $("<span contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'>0</span"),
+        docObj: $("<span contenteditable='true' tabindex='-1' style='display:none'>0</span"),
         projectName: $("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col-auto > div > div:nth-child(1) > span.labeled-attribute--attribute").text(),
         skip: !0,
         id: "",
@@ -33,8 +44,7 @@ var counter = {
             this.docObj.text(String(parseInt(this.docObj.text()) + 1)), localStorage.setItem(this.projectName, this.docObj.text())
         },
         onload: function() {
-            this.incr()
-	    totalSeconds = 0;	
+            this.incr()	
         }
     },
     s_ajaxListener = {
@@ -42,9 +52,8 @@ var counter = {
         tempSend: XMLHttpRequest.prototype.send,
         callback: function() {
           this.url.includes("task_ratings") && counter.onload()
-	  $('#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right').prepend('<label id="minutes">00</label>:<label id="seconds">00</label >&nbsp;&nbsp;&nbsp;');
-	  $("<span contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'><script>localStorage.getItem('NEU Task')</script></span");
-	  setInterval(setTime, 1000);
+	  createCounter();
+	  timer();
         }
     };
 XMLHttpRequest.prototype.open = function(e, t) {
