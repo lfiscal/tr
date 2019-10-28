@@ -7,7 +7,6 @@ if ( $( "#current" ).length == 0 ) {
     createCounter();
 }
 
-$( document ).ready(function() {
 if (counter) throw counter.init(), "resetting";
 var counter = {
         docObj: $("<span contenteditable='true' tabindex='-1' style='display:none'>0</span"),
@@ -41,4 +40,3 @@ XMLHttpRequest.prototype.open = function(e, t) {
     if (!t) t = "";
     s_ajaxListener.tempSend.apply(this, arguments), "post" == s_ajaxListener.method.toLowerCase() && (s_ajaxListener.data = e), s_ajaxListener.callback()
 }, hideParseSetting = !1, counter.init();
-});
