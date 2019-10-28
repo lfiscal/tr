@@ -1,26 +1,3 @@
-var timer = function(){
-	$('#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right').prepend('<label id="minutes">00</label>:<label id="seconds">00</label >&nbsp;&nbsp;&nbsp;');
- 	minutesLabel = document.getElementById("minutes");
- 	secondsLabel = document.getElementById("seconds");
-	totalSeconds = 0;
-	setInterval(setTime, 1000);
-
-	 function setTime() {
-	  ++totalSeconds;
-	  secondsLabel.innerHTML = pad(totalSeconds % 60);
-	  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-	}
-
-	function pad(val) {
-	  var valString = val + "";
-	  if (valString.length < 2) {
-	    return "0" + valString;
-	  } else {
-	    return valString;
-	  }
-	}
-}
-
 var createCounter = function(){
 	currentNum = localStorage.getItem('NEU Task');
 	$("<span id='current' contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid light gray; margin: 0px 10px;'></span").insertBefore("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right")
@@ -53,7 +30,6 @@ var counter = {
         callback: function() {
           this.url.includes("task_ratings") && counter.onload()
 	  createCounter();
-	  timer();
         }
     };
 XMLHttpRequest.prototype.open = function(e, t) {
