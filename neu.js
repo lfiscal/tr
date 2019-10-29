@@ -1,9 +1,14 @@
-
-
+var createCounter = function(){
+	currentNum = localStorage.getItem('NEU Task');
+	$("<span id='current' contenteditable='false' tabindex='-1' style='padding:6px 8px;border-radius:5px;border:1px solid light gray;margin:0px 10px;font-weight:bold'></span").insertBefore("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right")
+$('#current').text(currentNum);
+}
+if ( $( "#mainNum" ).length == 0 ) {
+    createCounter();
+}
 if (counter) throw counter.init(), "resetting";
-
 var counter = {
-        docObj: $("<span contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'>0</span"),
+        docObj: $("<span id='mainNum' contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'>0</span"),
         projectName: $("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col-auto > div > div:nth-child(1) > span.labeled-attribute--attribute").text(),
         skip: !0,
         id: "",
@@ -24,21 +29,18 @@ var counter = {
         callback: function() {
           console.log(this.url)
           this.url.includes("task_ratings") && counter.onload()
-	  counter.init();
-
+	  createCounter();
 $('#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right').prepend('<label id="minutes">00</label>:<label id="seconds">00</label >&nbsp;&nbsp;&nbsp;')
 
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds = 0;
 setInterval(setTime, 1000);
-
 function setTime() {
   ++totalSeconds;
   secondsLabel.innerHTML = pad(totalSeconds % 60);
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }
-
 function pad(val) {
   var valString = val + "";
   if (valString.length < 2) {
@@ -47,8 +49,6 @@ function pad(val) {
     return valString;
   }
 }
-
-
         }
     };
 XMLHttpRequest.prototype.open = function(e, t) {
