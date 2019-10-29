@@ -1,14 +1,4 @@
-var createCounter = function(){
-	currentNum = localStorage.getItem('NEU Task');
-	$("<span id='current' contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid light gray; margin: 0px 10px;'></span").insertBefore("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right")
-$('#current').text(currentNum);
-}
-if ( $( "#current" ).length == 0 ) {
-    createCounter();
-}
-
 if (counter) throw counter.init(), "resetting";
-
 var counter = {
         docObj: $("<span contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'>0</span"),
         projectName: $("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col-auto > div > div:nth-child(1) > span.labeled-attribute--attribute").text(),
@@ -31,7 +21,7 @@ var counter = {
         callback: function() {
           console.log(this.url)
           this.url.includes("task_ratings") && counter.onload()
-	  createCounter();
+	  this.init()
 
 $('#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col.text-right').prepend('<label id="minutes">00</label>:<label id="seconds">00</label >&nbsp;&nbsp;&nbsp;')
 
@@ -54,8 +44,6 @@ function pad(val) {
     return valString;
   }
 }
-
-
         }
     };
 XMLHttpRequest.prototype.open = function(e, t) {
