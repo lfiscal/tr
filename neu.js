@@ -4,7 +4,7 @@ var createCounter = function(){
 $('#current').text(currentNum);
 }
 
-if (counter) throw counter.init(), "resetting";
+if (counter) throw counter.init();
 var counter = {
         docObj: $("<span id='mainNum' contenteditable='true' tabindex='-1' style='padding: 6px 8px;border-radius:5px;border:1px solid lightgray; margin: 0px 10px;'>0</span"),
         projectName: $("#app-root > div > div.application-wrapper--content > div > div > div.action-bar > div > div.col-auto > div > div:nth-child(1) > span.labeled-attribute--attribute").text(),
